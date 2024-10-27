@@ -7,10 +7,10 @@ import java.util.List;
 public class Products {
 
     private static final ArrayList<Product> products = new ArrayList<> (
-            Arrays.asList(new Product(1, "a", "a is good", 20.0),
-                          new Product(2, "b", "b is good", 20.0),
-                          new Product(3, "c", "c is good", 20.0),
-                          new Product(4, "d", "d is good", 20.0)));
+            Arrays.asList(new Product(1, "chair", "lets you sit", 50.0),
+                          new Product(2, "bed", "is very uncomfortable :(", 260.0),
+                          new Product(3, "desk", "not good for procrastinators", 120.0),
+                          new Product(4, "lamp", "doesn't work", 45.0)));
 
     public static List<Product> getProducts() {
         return products.stream().toList();

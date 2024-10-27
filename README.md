@@ -22,4 +22,6 @@ Pure Thymeleaf implementation:
 Ajax Implementation:
  - code [Controller](src/main/java/com/secretsheppy/ajax_vs_thymleaf/controllers/ProductsRestController.java)
  - code [Template](src/main/resources/templates/ajax.html)
+ - code [loading products (javascript)](src/main/resources/static/js/load-products.js)
+ - code [adding products (javascript)](src/main/resources/static/js/new-product.js)
  - demo [localhost](http://localhost/products/ajax)

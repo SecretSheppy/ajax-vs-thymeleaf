@@ -54,7 +54,6 @@ const newProductError = (msg) => {
 $('#new-product-form').on('submit', (event) => {
     event.preventDefault();
 
-    // automatically filling the id with the next available id
     $.ajax({
         url: "/products/api/next_id"
     }).then((id) => {
@@ -66,14 +65,8 @@ $('#new-product-form').on('submit', (event) => {
             data: JSON.stringify(formToJSON('new-product-form')),
             contentType: "application/json; charset=utf-8"
         });
-    }).done((response) => {
-        console.log(response);
-
-        if (response.status === 200) {
-            newProduct(response.product);
-        } else {
-            newProductError(response.message);
-        }
+    }).done((response, statusText, xhr) => {
+        newProduct(response.product);
     }).fail((xhr) => {
         newProductError(xhr.responseJSON?.message || 'Failed to reach server');
     });

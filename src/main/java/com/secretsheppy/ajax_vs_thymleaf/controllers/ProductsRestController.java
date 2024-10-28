@@ -2,7 +2,7 @@ package com.secretsheppy.ajax_vs_thymleaf.controllers;
 
 import com.secretsheppy.ajax_vs_thymleaf.Product;
 import com.secretsheppy.ajax_vs_thymleaf.Products;
-import com.secretsheppy.ajax_vs_thymleaf.utils.ResponseBuilder;
+import com.secretsheppy.ajax_vs_thymleaf.Response;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,18 +29,15 @@ public class ProductsRestController {
     }
 
     @PostMapping("/products/api/new")
-    public ResponseEntity<Map<String, Object>> createProduct(@Valid @RequestBody Product product,
-                                                             BindingResult binding) {
+    public ResponseEntity<Response> createProduct(@Valid @RequestBody Product product, BindingResult binding) {
 
         if (binding.hasErrors()) {
-            return ResponseEntity.badRequest().body(ResponseBuilder.productResponseBuilder(
-                    HttpStatus.BAD_REQUEST.value(), binding.getAllErrors().get(0).getDefaultMessage(), null));
+            return ResponseEntity.badRequest().body(new Response(binding.getAllErrors().get(0).getDefaultMessage(), null));
         }
 
         Products.addProducts(product);
 
-        return ResponseEntity.ok(ResponseBuilder.productResponseBuilder(HttpStatus.OK.value(),
-                                                                        "Product created", product));
+        return ResponseEntity.ok(new Response("Product created", product));
     }
 
 }
